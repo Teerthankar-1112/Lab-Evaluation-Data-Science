@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Lab Evaluation: Pneumonia Detection | Kaggle</title>
+  <meta charset="utf-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Explore and run machine learning code with Kaggle Notebooks | Using data from No attached data sources" />
+  <meta name="turbolinks-cache-control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <meta name="theme-color" content="#008ABC" />
+  <script nonce="dQNpoXIwUNBSmYMFATEbng==" type="text/javascript">
+    window["pageRequestStartTime"] = 1647442956271;
+    window["pageRequestEndTime"] = 1647442956594;
+    window["initialPageLoadStartTime"] = new Date().getTime();
+  </script>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="anonymous" /><link rel="preconnect" href="https://stats.g.doubleclick.net" /><link rel="preconnect" href="https://storage.googleapis.com" /><link rel="preconnect" href="https://apis.google.com" />
+  <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="manifest" href="/static/json/manifest.json" crossorigin="use-credentials">
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/icon?family=Google+Material+Icons"
+    rel="preload" as="style" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i"
+    rel="preload" as="style" />
+  <link href="https://fonts.googleapis.com/icon?family=Google+Material+Icons"
+    rel="stylesheet" media="print" id="async-google-font-1" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet" media="print" id="async-google-font-2" />
+  <script nonce="dQNpoXIwUNBSmYMFATEbng==" type="text/javascript">
+    const styleSheetIds = ["async-google-font-1", "async-google-font-2"];
+    styleSheetIds.forEach(function (id) {
+      document.getElementById(id).addEventListener("load", function() {
+        this.media = "all";
+      });
+    });
+  </script>
+
+    <link rel="canonical" href="/teerthankarghosh/lab-evaluation-pneumonia-detection" />
+    <link rel="stylesheet" type="text/css" href="/static/assets/vendor.css?v=1f6d99669e949b7dfa2b" />
+    <link rel="stylesheet" type="text/css" href="/static/assets/app.css?v=17460ed6142908110f59" />
+  
+    
+ 
+      <script nonce="dQNpoXIwUNBSmYMFATEbng==">
+        try{(function(a,s,y,n,c,h,i,d,e){d=s.createElement("style");
+        d.appendChild(s.createTextNode(""));s.head.appendChild(d);d=d.sheet;
+        y=y.map(x => d.insertRule(x + "{ opacity: 0 !important }"));
+        h.start=1*new Date;h.end=i=function(){y.forEach(x => x<d.cssRules.length ? d.deleteRule(x) : {})};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+        })(window,document,['.site-header-react__nav'],'dataLayer',2000,{'GTM-52LNT9S':true});}catch(ex){}
+    </script>
+    <script nonce="dQNpoXIwUNBSmYMFATEbng==">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-12629138-1', {
+            'optimize_id': 'GTM-52LNT9S',
+            'displayFeaturesTask': null,
+            'send_page_view': false,
+            'content_group1': 'Notebooks'
+        });
+    </script>
+    <script nonce="dQNpoXIwUNBSmYMFATEbng==" async src="https://www.googletagmanager.com/gtag/js?id=UA-12629138-1"></script>
+
+  
+    
+    <meta name="og:url" content="https://kaggle.com/teerthankarghosh/lab-evaluation-pneumonia-detection" />
+    <meta property="og:title" content="Lab Evaluation: Pneumonia Detection" />
+    <meta property="og:description" content="Explore and run machine learning code with Kaggle Notebooks | Using data from No attached data sources" />
+    <meta property="og:type" content="website" />
+    <meta name="og:image" content="https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@kaggledatasets" />
+
+
+  <meta name="twitter:site" content="@Kaggle" /> 
+  
+    
+    <script nonce="dQNpoXIwUNBSmYMFATEbng==" type="application/ld+json">{"@context":"http://schema.org/","@type":"Article","author":{"@type":"Person","name":"teerthankarghosh","sameAs":"/teerthankarghosh"},"headline":"Lab Evaluation: Pneumonia Detection","url":"https://www.kaggle.com/teerthankarghosh/lab-evaluation-pneumonia-detection","dateModified":"2022-03-16T14:06:40.49Z","datePublished":"2022-03-16T14:06:40.49Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.kaggle.com/teerthankarghosh/lab-evaluation-pneumonia-detection"},"publisher":{"@type":"Organization","name":"Kaggle","sameAs":"https://www.kaggle.com","logo":{"type":"ImageObject","url":"https://www.kaggle.com/static/images/site-logo.png"}},"image":["https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png"]}</script>
+
+
+  
+    
+
+
+  
+    
+    
+<script nonce="dQNpoXIwUNBSmYMFATEbng==" type="text/javascript">
+    var Kaggle = window.Kaggle || {};
+
+    Kaggle.Current = {
+        userId: 9741600,
+        userProfileUrl: '/teerthankarghosh',
+        userDisplayNameEscaped: 'TEERTHANKAR GHOSH',
+        userThumbnailUrl: 'https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png',
+        userEmail: 'tghosh_be19@thapar.edu',
+        userIsPhoneVerified: false,
+        userName: 'teerthankarghosh',
+        tier: 'Novice',
+        antiForgeryToken: 'CfDJ8LdUzqlsSWBPr4Ce3rb9VL_60eFQgUS3OjkJOQBE7RiQ7Q4NDoK5jVWWM3_522WLrPMbUfi8Gb152WtmIfu-iRRnSO1Fmu301GX2s_MSy9frVjgq5-7M1nbhHySlNfExhv09HPBgPynJ-qPBv8_ZH0Y46IHKxap4WgQZNB1GkETl3Hr82Mx_6rH2nL6H-9APxg',
+        isAnonymous: false,
+        analyticsToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDc0NDM4NTYsIlVzZXJJZCI6OTc0MTYwMH0.2pvVvp81x2_aBEkPQ9P3j8WUBaNzvVOmnhc7mxYb_Gk',
+        analyticsTokenExpiry: 15,
+        
+        
+        
+        
+        
+        
+        
+        enableRapidash: true, 
+    }
+        Kaggle.Current.log = function(){};
+        Kaggle.Current.warn = function(){};
+
+    var decodeUserDisplayName = function () {
+        var escapedUserDisplayName = Kaggle.Current.userDisplayNameEscaped || "";
+        try {
+            var textVersion = new DOMParser().parseFromString(escapedUserDisplayName, "text/html").documentElement.textContent;
+            if (textVersion) {
+                return textVersion;
+            }
+        } catch(ex) {}
+        return escapedUserDisplayName;
+    }
+    Kaggle.Current.userDisplayName = decodeUserDisplayName();
+</script>
+
+    
+
+<script nonce="dQNpoXIwUNBSmYMFATEbng==" type="text/javascript">
+    var Kaggle = window.Kaggle || {};
+    Kaggle.PageMessages = [];
+</script>
+
+
+
+    <script nonce="dQNpoXIwUNBSmYMFATEbng==">window['useKaggleAnalytics'] = true;</script>
+
+  <script id="gapi-target" nonce="dQNpoXIwUNBSmYMFATEbng==" src="https://apis.google.com/js/api.js" defer
+    async></script>
+  <script nonce="dQNpoXIwUNBSmYMFATEbng==" src="/static/assets/runtime.js?v=341395c0fcfb3ad8e669" data-turbolinks-track="reload"></script>
+  <script nonce="dQNpoXIwUNBSmYMFATEbng==" src="/static/assets/vendor.js?v=a2004e5f19533473e100" data-turbolinks-track="reload"></script>
+  <script nonce="dQNpoXIwUNBSmYMFATEbng==" src="/static/assets/app.js?v=98e303416aa3ddb56c16" data-turbolinks-track="reload"></script>
+    <script nonce="dQNpoXIwUNBSmYMFATEbng==" type="text/javascript">
+      window.kaggleStackdriverConfig = {
+        key: 'AIzaSyA4eNqUdRRskJsCZWVz-qL655Xa5JEMreE',
+        projectId: 'kaggle-161607',
+        service: 'web-fe',
+        version: 'ci',
+        userId: '9741600'
+      }
+    </script>
+</head>
+
+<body data-turbolinks="false">
+  <main>
+    
+
+
+
+
+
+
+<div id="site-container"></div>
+<div data-component-name="NavigationContainer" style="display: flex; flex-direction: column; flex: 1 0 auto;"></div><script class="kaggle-component" nonce="dQNpoXIwUNBSmYMFATEbng==">var Kaggle=window.Kaggle||{};Kaggle.State=Kaggle.State||[];Kaggle.State.push({"navigationType":"BOTH_NAV"});performance && performance.mark && performance.mark("NavigationContainer.componentCouldBootstrap");</script>
+<div id="site-body" class="hide">
+    
+
+
+
+
+<div data-component-name="KernelViewerMaterialContainer" style="display: flex; flex-direction: column; flex: 1 0 auto;"></div><script class="kaggle-component" nonce="dQNpoXIwUNBSmYMFATEbng==">var Kaggle=window.Kaggle||{};Kaggle.State=Kaggle.State||[];Kaggle.State.push({"kernel":{"id":25406626,"title":"Lab Evaluation: Pneumonia Detection","mostRecentRunId":90278440,"url":"/teerthankarghosh/lab-evaluation-pneumonia-detection","author":{"id":9741600,"displayName":"TEERTHANKAR GHOSH","userName":"teerthankarghosh","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/teerthankarghosh"},"isPrivate":true,"updatedTime":"2022-03-16T14:06:40.490Z","selfLink":"/kernels/25406626","dockerImagePinningType":"DOCKER_IMAGE_PINNING_TYPE_ORIGINAL","slug":"lab-evaluation-pneumonia-detection","canToggleVisibility":true},"kernelRun":{"id":90278440,"kernelId":25406626,"kernelVersionType":"QUICK","sourceType":"EDITOR_TYPE_NOTEBOOK","language":"LANGUAGE_PYTHON","title":"Lab Evaluation: Pneumonia Detection","dateCreated":"2022-03-16T15:01:51.443Z","scriptLanguageId":9,"scriptLanguageName":"IPython Notebook HTML","useNewKernelsBackend":true,"userPlan":"USER_PLAN_FREE"},"author":{"id":9741600,"displayName":"TEERTHANKAR GHOSH","userName":"teerthankarghosh","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/teerthankarghosh"},"baseUrl":"/teerthankarghosh/lab-evaluation-pneumonia-detection","collaborators":{"owner":{"userId":9741600,"profileUrl":"/teerthankarghosh","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","name":"TEERTHANKAR GHOSH","slug":"teerthankarghosh","type":"OWNER"}},"initialTab":"","log":"","ouputFilesOwnerInfo":{"kernel":{"kernelId":25406626,"kernelVersionId":90278440,"scope":"teerthankarghosh/lab-evaluation-pneumonia-detection"}},"renderableDataSources":[{"name":"No attached data sources","dataSourceUrl":"/kaggle/no-data-sources","thumbnailUrl":"/static/images/no-datasource.png"}],"versions":[{"id":90278440,"isNotebook":true,"languageName":"Python","lastRunTime":"2022-03-16T15:01:51.443Z","linesInsertedFromPrevious":240,"runInfo":{},"title":"Lab Evaluation: Pneumonia Detection","url":"/teerthankarghosh/lab-evaluation-pneumonia-detection?scriptVersionId=90278440","versionNumber":1,"hasVersionNumber":true,"versionType":"QUICK","userPlan":"USER_PLAN_FREE"}],"categories":{"type":"TAG_TYPE_NOTEBOOK"},"downloadAllFilesUrl":"/code/svzip/90278440","menuLinks":[{"href":"/teerthankarghosh/lab-evaluation-pneumonia-detection/code","tab":"code","text":"Code","title":"Code"},{"href":"/teerthankarghosh/lab-evaluation-pneumonia-detection/execution","showOnMobile":false,"tab":"execution","text":"Execution Info","title":"Execution Info"},{"href":"/teerthankarghosh/lab-evaluation-pneumonia-detection/log","showOnMobile":false,"tab":"log","text":"Log","title":"Log"},{"count":0,"href":"/teerthankarghosh/lab-evaluation-pneumonia-detection/data","tab":"data","text":"Input","title":"Input"},{"count":0,"href":"/teerthankarghosh/lab-evaluation-pneumonia-detection/comments","showZeroCountExplicitly":true,"tab":"comments","text":"Comments","title":"Comments"}],"rightMenuLinks":[{"href":"/code/fork-version/90278440","text":"Fork Notebook","title":"Fork Notebook"}],"callToAction":{"href":"/teerthankarghosh/lab-evaluation-pneumonia-detection/edit","text":"Edit Notebook","title":"Edit Notebook"},"voteButton":{"medalVotes":0,"canUpvote":true,"currentUserInfo":{"id":9741600,"displayName":"TEERTHANKAR GHOSH","userName":"teerthankarghosh","thumbnailUrl":"https://storage.googleapis.com/kaggle-avatars/thumbnails/default-thumb.png","profileUrl":"/teerthankarghosh"},"showVoters":true,"alwaysShowVoters":true,"kernelId":25406626},"canWrite":true,"canAdminister":true,"moderationStatus":"PRIVATED_MODERATION_STATUS_NO_ABUSE","@wf": "Kernels.GetKernelViewModelResponseWireFormat3"});performance && performance.mark && performance.mark("KernelViewerMaterialContainer.componentCouldBootstrap");</script>
+
+<form action="/teerthankarghosh/lab-evaluation-pneumonia-detection" id="__AjaxAntiForgeryForm" method="post"><input name="X-XSRF-TOKEN" type="hidden" value="CfDJ8LdUzqlsSWBPr4Ce3rb9VL_60eFQgUS3OjkJOQBE7RiQ7Q4NDoK5jVWWM3_522WLrPMbUfi8Gb152WtmIfu-iRRnSO1Fmu301GX2s_MSy9frVjgq5-7M1nbhHySlNfExhv09HPBgPynJ-qPBv8_ZH0Y46IHKxap4WgQZNB1GkETl3Hr82Mx_6rH2nL6H-9APxg" /></form>
+<script nonce="dQNpoXIwUNBSmYMFATEbng==" type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+    preferredFont: "TeX",
+    availableFonts: ["STIX", "TeX"],
+    linebreaks: {
+    automatic: true
+    },
+    EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+    inlineMath: [["\\(", "\\)"], ["\\\\(", "\\\\)"]],
+    displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+    processEscapes: true,
+    ignoreClass: "tex2jax_ignore|dno"
+    },
+    TeX: {
+    noUndefined: {
+    attributes: {
+    mathcolor: "red",
+    mathbackground: "#FFEEEE",
+    mathsize: "90%"
+    }
+    }
+    },
+    Macros: {
+    href: "{}"
+    },
+    skipStartupTypeset: true,
+    messageStyle: "none",
+    extensions: [],
+    });
+</script>
+<script type="text/javascript" nonce="dQNpoXIwUNBSmYMFATEbng==">
+  window.addEventListener("DOMContentLoaded", () => {
+    const head = document.getElementsByTagName("head")[0];
+    const useProdHosts = ["www.kaggle.com", "admin.kaggle.com"];
+    const subdomain = useProdHosts.includes(window.location.hostname) ? "www" : "staging";
+
+    const lib = document.createElement("script");
+    lib.type = "text/javascript";
+    lib.src = `https://${subdomain}.kaggleusercontent.com/static/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML`;
+    head.appendChild(lib);
+  });
+</script>
+
+
+</div>
+
+
+
+    <!-- Cheers, web-585bd6c997-wj2lkp. -->
+
+  </main>
+</body>
+
+</html>
